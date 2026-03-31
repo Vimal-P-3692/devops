@@ -34,11 +34,15 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 dir("${REPO_DIR}") {
-                    sh "docker push ${DOCKER_HUB}/${IMAGE_NAME}:latest"
+                    // This securely grabs your username/password from Jenkins
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                        sh "echo \$DOCKER_PASS | sudo docker login -u \$DOCKER_USER --password-stdin"
+                        sh "sudo docker push ${DOCKER_HUB}/${IMAGE_NAME}:latest"
+                    }
                 }
             }
         }
-
+        
         stage('Update Kubernetes Deployment') {
             steps {
                 sh """
