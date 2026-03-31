@@ -34,6 +34,6 @@ public class HelloControllerTest {
             String.class
         );
 
-        assertThat(response).contains("What are you trying to do ...");
+        assertThat(response).contains("Hey, What are you trying to do ...");
     }
 }
