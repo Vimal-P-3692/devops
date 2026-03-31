@@ -52,7 +52,7 @@ pipeline {
         stage('Update Kubernetes Deployment') {
             steps {
                 sh """
-                    kubectl set image deployment/${DEPLOYMENT} ${CONTAINER}=${DOCKER_HUB}/${IMAGE_NAME}:latest
+                    kubectl rollout restart deployment/java-app-deployment
                     kubectl rollout status deployment/${DEPLOYMENT}
                 """
             }
