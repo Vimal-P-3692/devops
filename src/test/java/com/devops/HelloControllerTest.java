@@ -26,4 +26,14 @@ public class HelloControllerTest {
 
         assertThat(response).contains("Hello World!");
     }
+
+    @Test
+    public void testEndpoint() {
+        String response = this.restTemplate.getForObject(
+            "http://localhost:" + port + "/", 
+            String.class
+        );
+
+        assertThat(response).contains("What are you trying to do ...");
+    }
 }

@@ -18,7 +18,7 @@ pipeline {
         stage('Build Java App with Maven') {
             steps {
                 dir("${REPO_DIR}") {
-                    sh "mvn clean package -DskipTests"
+                    sh "mvn clean package"
                 }
             }
         }
@@ -55,10 +55,10 @@ pipeline {
 
     post {
         success {
-            echo "✅ Deployment updated successfully!"
+            echo "Success !!!"
         }
         failure {
-            echo "❌ Pipeline failed!"
+            echo "Failed !!!"
         }
     }
 }
