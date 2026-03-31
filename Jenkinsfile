@@ -42,11 +42,11 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Update Kubernetes Deployment') {
             steps {
                 sh """
-                    skubectl set image deployment/${DEPLOYMENT} ${CONTAINER}=${DOCKER_HUB}/${IMAGE_NAME}:latest
+                    kubectl set image deployment/${DEPLOYMENT} ${CONTAINER}=${DOCKER_HUB}/${IMAGE_NAME}:latest
                     kubectl rollout status deployment/${DEPLOYMENT}
                 """
             }
