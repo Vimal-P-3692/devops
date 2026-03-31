@@ -2,12 +2,14 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_HUB = 'vimalp3692'
-        IMAGE_NAME = 'devops'
-        REPO_DIR   = '/var/lib/jenkins/devops'  // Use Jenkins home to avoid permission issues
-        DEPLOYMENT = 'java-app-deployment'      // Deployment name
-        CONTAINER  = 'java-app'                 // Container name in Deployment
-    }
+    JAVA_HOME = "/usr/lib/jvm/java-21-amazon-corretto"
+    PATH = "${JAVA_HOME}/bin:${env.PATH}"
+    DOCKER_HUB = 'vimalp3692'
+    IMAGE_NAME = 'devops'
+    REPO_DIR   = '/var/lib/jenkins/devops'
+    DEPLOYMENT = 'java-app-deployment'
+    CONTAINER  = 'java-app'
+}
 
     stages {
         stage('Build Java App with Maven') {
